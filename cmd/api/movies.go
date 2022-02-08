@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func (app *application) CreateMovieHandler(w http.ResponseWriter, r *http.Request) {
+func (app *application) createMovieHandler(w http.ResponseWriter, r *http.Request) {
 	var input struct {
 		Title   string       `json:"title"`
 		Year    int32        `json:"year"`
@@ -51,7 +51,7 @@ func (app *application) CreateMovieHandler(w http.ResponseWriter, r *http.Reques
 	}
 }
 
-func (app *application) ListMovieHandler(w http.ResponseWriter, r *http.Request) {
+func (app *application) listMovieHandler(w http.ResponseWriter, r *http.Request) {
 	var input struct {
 		Title   string
 		Genres  []string
@@ -86,7 +86,7 @@ func (app *application) ListMovieHandler(w http.ResponseWriter, r *http.Request)
 	}
 }
 
-func (app *application) ShowMovieHandler(w http.ResponseWriter, r *http.Request) {
+func (app *application) showMovieHandler(w http.ResponseWriter, r *http.Request) {
 	id, err := app.readIDParam(r)
 	if err != nil {
 		app.notFoundResponse(w, r)
@@ -110,7 +110,7 @@ func (app *application) ShowMovieHandler(w http.ResponseWriter, r *http.Request)
 	}
 }
 
-func (app *application) UpdateMovieHandler(w http.ResponseWriter, r *http.Request) {
+func (app *application) updateMovieHandler(w http.ResponseWriter, r *http.Request) {
 	id, err := app.readIDParam(r)
 	if err != nil {
 		app.notFoundResponse(w, r)
@@ -165,7 +165,7 @@ func (app *application) UpdateMovieHandler(w http.ResponseWriter, r *http.Reques
 	}
 }
 
-func (app *application) PatchMovieHandler(w http.ResponseWriter, r *http.Request) {
+func (app *application) patchMovieHandler(w http.ResponseWriter, r *http.Request) {
 	id, err := app.readIDParam(r)
 	if err != nil {
 		app.notFoundResponse(w, r)
@@ -241,7 +241,7 @@ func (app *application) PatchMovieHandler(w http.ResponseWriter, r *http.Request
 	}
 }
 
-func (app *application) DeleteMovieHandler(w http.ResponseWriter, r *http.Request) {
+func (app *application) deleteMovieHandler(w http.ResponseWriter, r *http.Request) {
 	id, err := app.readIDParam(r)
 	if err != nil {
 		app.notFoundResponse(w, r)

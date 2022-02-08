@@ -13,12 +13,14 @@ func (app *application) routes() http.Handler {
 
 	router.HandlerFunc(http.MethodGet, "/v1/healthcheck", app.healthcheckHandler)
 
-	router.HandlerFunc(http.MethodGet, "/v1/movies", app.ListMovieHandler)
-	router.HandlerFunc(http.MethodGet, "/v1/movies/:id", app.ShowMovieHandler)
-	router.HandlerFunc(http.MethodPost, "/v1/movies", app.CreateMovieHandler)
-	router.HandlerFunc(http.MethodPut, "/v1/movies/:id", app.UpdateMovieHandler)
-	router.HandlerFunc(http.MethodPatch, "/v1/movies/:id", app.PatchMovieHandler)
-	router.HandlerFunc(http.MethodDelete, "/v1/movies/:id", app.DeleteMovieHandler)
+	router.HandlerFunc(http.MethodGet, "/v1/movies", app.listMovieHandler)
+	router.HandlerFunc(http.MethodGet, "/v1/movies/:id", app.showMovieHandler)
+	router.HandlerFunc(http.MethodPost, "/v1/movies", app.createMovieHandler)
+	router.HandlerFunc(http.MethodPut, "/v1/movies/:id", app.updateMovieHandler)
+	router.HandlerFunc(http.MethodPatch, "/v1/movies/:id", app.patchMovieHandler)
+	router.HandlerFunc(http.MethodDelete, "/v1/movies/:id", app.deleteMovieHandler)
+
+	router.HandlerFunc(http.MethodPost, "/v1/users", app.registerUserHandler)
 
 	return app.recoverPanic(app.rateLimit(router))
 }
