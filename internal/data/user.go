@@ -14,6 +14,8 @@ var (
 	ErrDuplicateEmail = errors.New("duplicate email")
 )
 
+var AnonymousUser = &User{}
+
 type User struct {
 	ID        int64     `json:"id"`
 	CreatedAt time.Time `json:"created_at"`
@@ -205,7 +207,7 @@ func (m UserModel) GetForToken(tokenScope, tokenPlainText string) (*User, error)
 		&user.Version)
 	if err != nil {
 		switch {
-		case errors.Is(err, ErrRecordNotFound):
+		case errors.Is(err, sql.ErrNoRows):
 			return nil, ErrRecordNotFound
 		default:
 			return nil, err
@@ -213,4 +215,8 @@ func (m UserModel) GetForToken(tokenScope, tokenPlainText string) (*User, error)
 	}
 
 	return &user, nil
+}
+
+func (u *User) IsAnonymous() bool {
+	return u == AnonymousUser
 }
